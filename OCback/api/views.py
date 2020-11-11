@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 from api.models import Post, Category, Main,UserProfile
 from api.serializers import CategorySerializer, PostSerializer, MainSerializer, UserSerializer,ProfileSerializer
 from rest_framework.permissions import IsAuthenticated
@@ -33,6 +34,7 @@ class PostList(generics.ListCreateAPIView):
 class PostListPublished(generics.ListCreateAPIView):
     queryset = Post.objects.filter(is_published=True).order_by('-date')
     serializer_class = PostSerializer
+    pagination_class = PageNumberPagination
 
 
 class CategoryList(generics.ListCreateAPIView):

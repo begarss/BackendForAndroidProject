@@ -8,6 +8,9 @@ from django.dispatch import receiver
 class Category(models.Model):
     catName = models.CharField(max_length=300)
 
+    def __str__(self):
+        return self.catName
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(null=True, blank=True,upload_to="images/",default="images/ava.png")
@@ -31,6 +34,9 @@ class Post(models.Model):
     is_published = models.BooleanField(default=False, null=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 
 
 class Main(models.Model):
